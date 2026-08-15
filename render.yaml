@@ -1,17 +1,12 @@
 services:
-  - type: web
+  - type: worker
     name: photo-collage-bot
     env: python
     buildCommand: pip install -r requirements.txt
-    startCommand: uvicorn bot:starlette_app --host 0.0.0.0 --port $PORT
-    healthCheckPath: /health
+    startCommand: python bot.py
     envVars:
       - key: BOT_TOKEN
         sync: false
-      - key: WEBHOOK_URL
-        sync: false
-      - key: PORT
-        value: 10000
       - key: MAX_IMAGES
         value: 12
       - key: SESSION_TIMEOUT
